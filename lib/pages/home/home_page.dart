@@ -1,6 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jolly_pomodoro/components/current_task/cubit/current_task_cubit.dart';
 
+import '../../components/current_task/current_task.dart';
 import '../../components/settings/cubit/settings_cubit.dart';
 import '../../components/settings/settings.dart';
 import '../../components/watch/watch.dart';
@@ -23,8 +26,13 @@ class _PomodoroAppState extends State<PomodoroApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: BlocProvider(
-        create: (_) => SettingsCubit(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (BuildContext context) => SettingsCubit()),
+          BlocProvider(
+            create: (BuildContext context) => CurrentTaskCubit(),
+          )
+        ],
         child: const PomodoroHomePage(title: 'Jolly Pomodoro'),
       ),
     );
@@ -63,13 +71,7 @@ class _PomodoroHomePageState extends State<PomodoroHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Spacer(),
-                Text(
-                  'Current Task',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 36,
-                      color: Colors.white),
-                ),
+                Task(currentTask: 'Tap to write your task'),
                 SizedBox(height: 32),
                 Watch(),
                 SizedBox(height: 64),

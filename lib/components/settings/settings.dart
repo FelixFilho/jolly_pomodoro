@@ -6,7 +6,7 @@ import 'package:jolly_pomodoro/components/settings/cubit/settings_state.dart';
 import 'package:jolly_pomodoro/components/text_time.dart';
 
 class SettingsView extends StatefulWidget {
-  SettingsView({super.key});
+  const SettingsView({super.key});
 
   @override
   State<SettingsView> createState() => _SettingsViewState();
@@ -19,7 +19,6 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _cubit = context.read<SettingsCubit>();
   }
