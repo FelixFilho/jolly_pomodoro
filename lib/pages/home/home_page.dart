@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jolly_pomodoro/components/current_task/cubit/current_task_cubit.dart';
 
+import '../../components/control_buttons.dart';
 import '../../components/current_task/current_task.dart';
 import '../../components/settings/cubit/settings_cubit.dart';
 import '../../components/settings/settings.dart';
@@ -66,21 +67,27 @@ class _PomodoroHomePageState extends State<PomodoroHomePage> {
         body: Container(
           height: MediaQuery.of(context).size.height - 200,
           color: const Color(0xFF344966),
-          child: const Center(
+          child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Spacer(),
-                Task(currentTask: 'Tap to write your task'),
-                SizedBox(height: 32),
+                const Task(currentTask: 'Tap to write your task'),
+                const SizedBox(height: 32),
                 Watch(),
-                SizedBox(height: 64),
+                const SizedBox(height: 64),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ControlButtons(title: 'Stop'),
-                    SizedBox(width: 12),
-                    ControlButtons(title: 'Start'),
+                    ControlButtons(
+                      title: 'Stop',
+                      onPressedCallback: () {},
+                    ),
+                    const SizedBox(width: 12),
+                    ControlButtons(
+                      title: 'Start',
+                      onPressedCallback: () {},
+                    ),
                   ],
                 ),
                 // Spacer(),
@@ -88,34 +95,8 @@ class _PomodoroHomePageState extends State<PomodoroHomePage> {
             ),
           ),
         ),
-        bottomSheet: SettingsView(),
+        bottomSheet: const SettingsView(),
       ),
-    );
-  }
-}
-
-class ControlButtons extends StatelessWidget {
-  final String title;
-
-  const ControlButtons({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: const ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFF344966)),
-        // side: MaterialStatePropertyAll(BorderSide.none),
-      ),
-      child: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
-      onPressed: () {},
     );
   }
 }
